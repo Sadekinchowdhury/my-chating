@@ -1,18 +1,22 @@
 import React, { useContext } from 'react';
 import { useForm } from "react-hook-form";
 import { toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
+
 import { AuthContext } from '../../Context/AuthProvider';
 import Allposts from '../Media/Allposts';
+
 
 const Home = () => {
     const { user, loading } = useContext(AuthContext)
     console.log(user)
     const imageHostkeyk = process.env.REACT_APP_IMG_KEY
     const { register, formState: { errors }, handleSubmit } = useForm()
+    const navigate = useNavigate()
 
     const PostButton = data => {
 
-
+        console.log(data)
         const image = data.img[0]
 
         const formData = new FormData()
@@ -28,6 +32,7 @@ const Home = () => {
             .then(imgData => {
                 console.log(imgData)
                 if (imgData.success) {
+
                     console.log(imgData.data.url)
 
                 }
@@ -39,7 +44,7 @@ const Home = () => {
                     email: user?.email
 
                 }
-                fetch('http://localhost:5000/post', {
+                fetch('https://chat-six-ashen.vercel.app/post', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'
@@ -49,7 +54,8 @@ const Home = () => {
                     .then(res => res.json())
                     .then(data => {
                         if (data.acknowledged) {
-                            toast('post aded')
+                            navigate('/media')
+                            toast.success('Your post adedd on media')
                         }
                         console.log(data)
 
@@ -63,6 +69,8 @@ const Home = () => {
 
 
     }
+
+
     return (
         <section className='p-7 w-full'>
             <div>
@@ -98,7 +106,22 @@ const Home = () => {
 
 
             </div>
+            {/* <div>
+                {
+                    post &&
+                    post?.map(poster =>
+                        <Homepost
+                            poster={poster}
+                            id={poster._id}
+                        >
 
+                        </Homepost>
+
+
+                    )
+
+                }
+            </div> */}
         </section>
     );
 };

@@ -1,14 +1,17 @@
 import { secondary } from 'daisyui/src/colors/colorNames';
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaUser, FaSchool, FaAddressBook } from 'react-icons/fa'
 import { AiOutlineMail } from 'react-icons/ai'
 import Modal from './Modal/Modal';
+import { AuthContext } from '../../Context/AuthProvider';
 
 
 
 
 const About = () => {
+    const { user } = useContext(AuthContext)
+    const { about, setAbout } = useState(null)
     return (
         <section>
             <div className='items-center justify-center text-center mt-4 '>
@@ -28,7 +31,7 @@ const About = () => {
                         <FaUser></FaUser>
                     </div>
                     <div className=' '>
-                        <span>Md Sadekin</span>
+                        <span>{user?.displayName}</span>
                     </div>
                 </div>
                 <div className='flex p-3 items-center font-semibold bg-slate-300 shadow-xl rounded mb-2'>
@@ -58,8 +61,17 @@ const About = () => {
 
             </div>
             <div className='mb-4 ml-3 justify-end place-items-end'>
-                <label htmlFor="edit" className="btn btn-info btn-sm">Edit</label>
+                <label htmlFor="edit" className="btn btn-info btn-sm">Edit
+
+
+
+                </label>
+                <div>
+                    <Modal></Modal>
+                </div>
+
             </div>
+
         </section >
     );
 };

@@ -15,6 +15,8 @@ const Authprovide = ({ children }) => {
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
 
+
+
     // signup
     const creatUsers = (email, password) => {
         return createUserWithEmailAndPassword(auth, email, password)
@@ -70,6 +72,7 @@ const Authprovide = ({ children }) => {
         LogOut,
         loading,
         GoogleLogin,
+
 
 
 

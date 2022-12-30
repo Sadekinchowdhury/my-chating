@@ -19,7 +19,8 @@ const Routes = createBrowserRouter([
             },
             {
                 path: '/media',
-                element: <Media></Media>
+                element: <Media></Media>,
+
             },
             {
                 path: '/message',
@@ -36,7 +37,8 @@ const Routes = createBrowserRouter([
             {
                 path: '/signup',
                 element: <SignUp></SignUp>
-            }
+            },
+
         ]
     }
 ])

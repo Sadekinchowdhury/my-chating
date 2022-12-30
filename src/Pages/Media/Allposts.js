@@ -1,18 +1,21 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Like from '../../Like/Like';
+
 import { BiLike, BiComment, BiMessage } from 'react-icons/bi'
 import { AuthContext } from '../../Context/AuthProvider';
 import { toast } from 'react-hot-toast';
 
 
 
+
 const Allposts = ({ posts, refetch }) => {
+
+
+
     const { _id, liking, comments, likeusersname, commentusername } = posts
     const { user } = useContext(AuthContext)
 
     const [like, setLike] = useState(liking + 1 || 1)
-
 
     const addlike = () => {
         const liked = {
@@ -21,7 +24,7 @@ const Allposts = ({ posts, refetch }) => {
         }
         setLike(like + 1)
 
-        fetch(`http://localhost:5000/post/${_id}`, {
+        fetch(`https://chat-six-ashen.vercel.app/post/${_id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -32,9 +35,8 @@ const Allposts = ({ posts, refetch }) => {
             .then(data => {
                 if (data.modifiedCount > 0) {
 
+                    console.log(data)
                 }
-
-                console.log(data)
 
             })
 
@@ -50,7 +52,7 @@ const Allposts = ({ posts, refetch }) => {
 
         }
 
-        fetch(`http://localhost:5000/post/comment/${_id}`, {
+        fetch(`https://chat-six-ashen.vercel.app/post/comment/${_id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -60,10 +62,10 @@ const Allposts = ({ posts, refetch }) => {
             .then(res => res.json())
             .then(data => {
                 if (data.modifiedCount > 0) {
-                    refetch()
+                    console.log(data)
+
                 }
 
-                console.log(data)
 
             })
 
